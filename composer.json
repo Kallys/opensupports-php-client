@@ -11,15 +11,20 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "slim/slim": "~2.0",
         "respect/validation": "^1.1",
         "phpmailer/phpmailer": "^5.2",
-        "google/recaptcha": "~1.1",
-        "gabordemooij/redbean": "^4.3",
-        "ifsnop/mysqldump-php": "2.*",
-        "ezyang/htmlpurifier": "^4.8"
+        "gabordemooij/redbean": "^4.3"
+    },
+    "require-dev": {
+        "phpunit/dbunit": "^3.0"
     },
     "config": {
         "vendor-dir": "src/lib/vendor"
+    },
+    "autoload": {
+        "classmap": ["src/OpenSupports"]
+    },
+    "autoload-dev": {
+        "classmap": ["tests/"]
     }
 }
