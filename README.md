@@ -5,7 +5,7 @@ It allows user to import this project as a composer dependency and use it like a
 ## Requirements
 * PHP 5.6+
 * MySQL 4.1+
-* OpenSupports server 0.4b+ (currently based on opensupports/opensupports@51dc76b3861ff19c4c5ceba606d75589cb0619e6 )
+* OpenSupports server 0.4b+ (currently based on [51dc76b](opensupports/opensupports@51dc76b3861ff19c4c5ceba606d75589cb0619e6))
 
 ## Installation
 ```
