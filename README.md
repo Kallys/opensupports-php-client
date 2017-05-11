@@ -1,11 +1,11 @@
-opensupports-php-client is a partial client support of [http://www.opensupports.com/](http://www.opensupports.com/) for PHP projects integration without using API.
+opensupports-php-client is a partial client support of [OpenSupports](http://www.opensupports.com/) for PHP projects integration without using API.
 
 It allows user to import this project as a composer dependency and use it like a library to interact with an running instance of OpenSuports server.
 
 ## Requirements
 * PHP 5.6+
 * MySQL 4.1+
-* OpenSupports server 0.4b+ (currently based on opensupports/opensupports@51dc76b3861ff19c4c5ceba606d75589cb0619e6 )
+* OpenSupports server 0.4b+ (currently based on [51dc76b](https://github.com/opensupports/opensupports/commit/51dc76b3861ff19c4c5ceba606d75589cb0619e6))
 
 ## Installation
 ```
