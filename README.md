@@ -25,7 +25,7 @@ Add the following repositories to your composer.json:
                 "url" : "https://github.com/opensupports/opensupports.git",
                 "type" : "git",
                 "reference" : "master"
-           }
+           },
            "autoload" : {
                 "classmap" : [
                     "server/controllers/",
