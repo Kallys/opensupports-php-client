@@ -1,9 +1,5 @@
 <?php
-
-namespace OpenSupports\Models;
-
 use RedBeanPHP\Facade as RedBean;
-use OpenSupports\Lib\DataStoreList;
 
 abstract class DataStore {
     protected $_bean;
@@ -111,6 +107,10 @@ abstract class DataStore {
         return $property;
     }
 
+    public function __isset($name) {
+    	return array_key_exists($name, $this->properties) || array_key_exists($name, $this->_bean);
+    }
+
     private function setBean($beanInstance) {
         $this->_bean = $beanInstance;
     }
@@ -121,7 +121,7 @@ abstract class DataStore {
         if (strpos($prop, 'List')) {
             $parsedProp = DataStoreList::getList($this->getListType($prop), $parsedProp);
         } else if ($parsedProp instanceof \RedBeanPHP\OODBBean) {
-        	$beanType = '\\OpenSupports\\Models\\' . ucfirst($parsedProp->getPropertiesAndType()[1]);
+            $beanType = ucfirst($parsedProp->getPropertiesAndType()[1]);
 
             $parsedProp = new $beanType($parsedProp);
 
@@ -155,6 +155,10 @@ abstract class DataStore {
         }
     }
 
+    public function updateProperties() {
+		$this->setBean($this->_bean->fresh());
+    }
+
     private function updateBeanProp($key, $value) {
         if ($value instanceof DataStoreList) {
             $this->_bean[$key] = $value->toBeanList();
@@ -172,6 +176,6 @@ abstract class DataStore {
         $listType = str_replace('shared', '', $listType);
         $listType = str_replace('own', '', $listType);
 
-        return '\\OpenSupports\\Models\\' . $listType;
+        return $listType;
     }
 }

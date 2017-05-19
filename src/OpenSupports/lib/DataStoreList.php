@@ -1,10 +1,6 @@
 <?php
 
-namespace OpenSupports\Lib;
-
-use OpenSupports\Models\DataStore;
-
-class DataStoreList implements \IteratorAggregate {
+class DataStoreList implements IteratorAggregate {
     private $list = [];
 
     public static function getList($type, $beanList) {
@@ -18,7 +14,7 @@ class DataStoreList implements \IteratorAggregate {
     }
 
     public function getIterator() {
-        return new \ArrayIterator($this->list);
+        return new ArrayIterator($this->list);
     }
 
     public function add(DataStore $dataStore) {

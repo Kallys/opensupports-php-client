@@ -8,13 +8,6 @@
 		<field name="name">Help and Support</field>
 	</row>
 	</table_data>
-	<table_data name="department_staff">
-	<row>
-		<field name="id">1</field>
-		<field name="department_id">1</field>
-		<field name="staff_id">1</field>
-	</row>
-	</table_data>
 	<table_data name="language">
 	<row>
 		<field name="id">1</field>
@@ -75,22 +68,6 @@
 		<field name="code">tr</field>
 		<field name="allowed">1</field>
 		<field name="supported">0</field>
-	</row>
-	</table_data>
-	<table_data name="log">
-	<row>
-		<field name="id">1</field>
-		<field name="type">SIGNUP</field>
-		<field name="to" xsi:nil="true" />
-		<field name="date">201705101400</field>
-		<field name="author_user_id">1</field>
-	</row>
-	<row>
-		<field name="id">2</field>
-		<field name="type">CREATE_TICKET</field>
-		<field name="to">906662</field>
-		<field name="date">201705101402</field>
-		<field name="author_user_id">1</field>
 	</row>
 	</table_data>
 	<table_data name="mailtemplate">
@@ -34905,15 +34882,6 @@
 &lt;/html&gt;</field>
 	</row>
 	</table_data>
-	<table_data name="sessioncookie">
-	<row>
-		<field name="id">1</field>
-		<field name="token">e7f46cf7c213564a594648d95f9414e9</field>
-		<field name="ip">127.0.0.1</field>
-		<field name="creation_date">10-05-2017 (14:01:29)</field>
-		<field name="user_id">1</field>
-	</row>
-	</table_data>
 	<table_data name="setting">
 	<row>
 		<field name="id">1</field>
@@ -35036,6 +35004,49 @@
 		<field name="profile_pic"></field>
 		<field name="verification_token" xsi:nil="true" />
 		<field name="last_login">201705101403</field>
+	</row>
+	</table_data>
+	<table_data name="user">
+	<row>
+		<field name="id">1</field>
+		<field name="email">customer@opensupports.com</field>
+		<field name="password">$2y$10$ZNLVQV4aw3zNt7AxTnDYwOzpyAsEVPsFDnywX9fK1AV8I6dz6yS8G</field>
+		<field name="name">Customer</field>
+		<field name="signup_date">201705101400</field>
+		<field name="tickets">1</field>
+		<field name="verification_token" xsi:nil="true" />
+	</row>
+	</table_data>
+	<table_data name="department_staff">
+	<row>
+		<field name="id">1</field>
+		<field name="department_id">1</field>
+		<field name="staff_id">1</field>
+	</row>
+	</table_data>
+	<table_data name="log">
+	<row>
+		<field name="id">1</field>
+		<field name="type">SIGNUP</field>
+		<field name="to" xsi:nil="true" />
+		<field name="date">201705101400</field>
+		<field name="author_user_id">1</field>
+	</row>
+	<row>
+		<field name="id">2</field>
+		<field name="type">CREATE_TICKET</field>
+		<field name="to">906662</field>
+		<field name="date">201705101402</field>
+		<field name="author_user_id">1</field>
+	</row>
+	</table_data>
+	<table_data name="sessioncookie">
+	<row>
+		<field name="id">1</field>
+		<field name="token">e7f46cf7c213564a594648d95f9414e9</field>
+		<field name="ip">127.0.0.1</field>
+		<field name="creation_date">10-05-2017 (14:01:29)</field>
+		<field name="user_id">1</field>
 	</row>
 	</table_data>
 	<table_data name="stat">
@@ -35640,17 +35651,6 @@
 		<field name="id">1</field>
 		<field name="ticket_id">1</field>
 		<field name="user_id">1</field>
-	</row>
-	</table_data>
-	<table_data name="user">
-	<row>
-		<field name="id">1</field>
-		<field name="email">customer@opensupports.com</field>
-		<field name="password">$2y$10$ZNLVQV4aw3zNt7AxTnDYwOzpyAsEVPsFDnywX9fK1AV8I6dz6yS8G</field>
-		<field name="name">Customer</field>
-		<field name="signup_date">201705101400</field>
-		<field name="tickets">1</field>
-		<field name="verification_token" xsi:nil="true" />
 	</row>
 	</table_data>
 </database>
