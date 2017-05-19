@@ -50,7 +50,7 @@ Add the following repositories to your composer.json:
 ```
 
 Then run:
-`composer require kallys/opensupports-php-client:dev-dev-replacement`
+`composer require kallys/opensupports-php-client`
 
 ## Supported features
 * /ticket/create Create ticket (except captcha integration)
