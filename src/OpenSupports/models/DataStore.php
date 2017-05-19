@@ -121,7 +121,7 @@ abstract class DataStore {
         if (strpos($prop, 'List')) {
             $parsedProp = DataStoreList::getList($this->getListType($prop), $parsedProp);
         } else if ($parsedProp instanceof \RedBeanPHP\OODBBean) {
-            $beanType = ucfirst($parsedProp->getPropertiesAndType()[1]);
+        	$beanType = '\\OpenSupports\\Models\\' . ucfirst($parsedProp->getPropertiesAndType()[1]);
 
             $parsedProp = new $beanType($parsedProp);
 

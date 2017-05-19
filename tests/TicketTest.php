@@ -10,6 +10,10 @@ use OpenSupports\OpenSupports;
 
 class TicketTest extends \OpenSupports\Tests\Lib\DbTestCase
 {
+	public function testGet() {
+		$this->assertEquals('My first ticket', Ticket::get(906662)->title);
+	}
+
 	public function testCreationWithUserSystemEnabled() {
 		// Enable user system
 		$userSystemEnabled = Setting::getSetting('user-system-enabled');
@@ -37,13 +41,13 @@ class TicketTest extends \OpenSupports\Tests\Lib\DbTestCase
 
 	// Create ticket with registered user
 	private function createWithRegisteredUser() {
-		$ticket = new Ticket('Ticket from registered', 'Ticket test content', 1, 'en', User::getUser(1));
+		$ticket = Ticket::create('Ticket from registered', 'Ticket test content', 1, 'en', 1);
 		$this->assertEquals(1, $this->getConnection()->getRowCount('ticket', 'ticket_number = ' . $ticket->ticketNumber));
 	}
 
 	// Create ticket with user infos
 	private function createWithUserInfos() {
-		$ticket = new Ticket('Ticket from unknown', 'Ticket test content', 1, 'en', null, 'ano@nymo.us', 'Anonymous');
+		$ticket = Ticket::create('Ticket from unknown', 'Ticket test content', 1, 'en', null, 'ano@nymo.us', 'Anonymous');
 		$this->assertEquals(1, $this->getConnection()->getRowCount('ticket', 'ticket_number = ' . $ticket->ticketNumber));
 	}
 
