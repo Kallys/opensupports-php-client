@@ -73,18 +73,83 @@ class TicketTest extends \OpenSupports\Tests\Lib\DbTestCase
 		$this->createWithRegisteredUser();
 	}
 
-	public function testClose() {
+	public function testCloseWithUserSystemEnabled() {
 		// Enable user system
 		$this->setUserSystemEnabled(true);
 
 		// Login as user
 		$this->login();
 
-		// Create new tickets
+		// Create a new ticket
 		$ticket = $this->createWithRegisteredUser();
 
-		$ticket->close();
-		$this->assertTrue((bool)$ticket->closed);
+		// Close ticket
+		$this->closeTicket($ticket);
+
+		// Double close does not except
+		$this->closeTicket($ticket);
+	}
+
+	public function testCloseWithUserSystemDisabled() {
+		// Disable user system
+		$this->setUserSystemEnabled(false);
+
+		// Login as staff
+		$this->login(true);
+
+		// Create a new ticket
+		$ticket = $this->createWithUserInfos();
+
+		// Close ticket
+		$this->closeTicket($ticket);
+
+		// Logout
+		$this->logout();
+
+		// Create a new ticket
+		$ticket = $this->createWithUserInfos();
+
+		// Close ticket
+		$this->closeTicket($ticket);
+	}
+
+	public function testCommentAsUserWithUserSystemEnabled() {
+		// Enable user system
+		$this->setUserSystemEnabled(true);
+
+		// Login as user
+		$this->login();
+
+		// Create a new ticket
+		$ticket = $this->createWithRegisteredUser();
+
+		// Comment ticket
+		$this->commentTicket($ticket);
+	}
+
+	public function testCommentAsStaffWithUserSystemDisabled() {
+		// Disable user system
+		$this->setUserSystemEnabled(false);
+
+		// Login as staff
+		$this->login(true);
+
+		// Create a new ticket
+		$ticket = $this->createWithUserInfos();
+
+		// Comment ticket
+		$this->commentTicket($ticket);
+	}
+
+	public function testCommentAsUserWithUserSystemDisabled() {
+		// Disable user system
+		$this->setUserSystemEnabled(false);
+
+		// Create a new ticket
+		$ticket = $this->createWithUserInfos();
+
+		// Comment ticket
+		$this->commentTicket($ticket);
 	}
 
 	// Create ticket with registered user
@@ -99,6 +164,18 @@ class TicketTest extends \OpenSupports\Tests\Lib\DbTestCase
 		$ticket = Ticket::create('Ticket from unknown', 'Ticket test content', 1, 'en', 'ano@nymo.us', 'Anonymous');
 		$this->assertEquals(1, $this->getConnection()->getRowCount('ticket', 'ticket_number = ' . $ticket->ticketNumber));
 		return $ticket;
+	}
+
+	// Close ticket
+	private function closeTicket(Ticket $ticket) {
+		$ticket->close();
+		$this->assertTrue((bool)$ticket->closed);
+	}
+
+	// Comment ticket
+	private function commentTicket(Ticket $ticket) {
+		$ticket->comment('Ticket test comment content');
+		$this->assertEquals(1, $this->getConnection()->getRowCount('ticketevent', 'ticket_id = ' . $ticket->id . ' AND type = "COMMENT"'));
 	}
 
 	// Create a ticket with an attachment (and registered user)

@@ -46,4 +46,46 @@ class UserTest extends \OpenSupports\Tests\Lib\DbTestCase
 		$this->expectExceptionMessage(\ERRORS::USER_SYSTEM_DISABLED);
 		$user = User::get(1);
 	}
+
+	public function testGetLoggedUserWithUserSystemEnabled() {
+		// Enable user system
+		$this->setUserSystemEnabled(true);
+
+		// Login as user
+		$this->login();
+
+		// Get logged in user
+		$this->assertEquals('Customer', User::getLoggedUser()->name);
+
+		// Assert no user is logged in
+		$this->logout();
+
+		// Get logged in user
+		$this->expectExceptionMessage(\ERRORS::NO_PERMISSION);
+		User::getLoggedUser();
+	}
+
+	public function testGetLoggedUserAsStaffWithUserSystemEnabled() {
+		// Enable user system
+		$this->setUserSystemEnabled(true);
+
+		// Login as staff
+		$this->login(true);
+
+		// Get logged in user
+		$this->expectExceptionMessage(\ERRORS::INVALID_CREDENTIALS);
+		User::getLoggedUser();
+	}
+
+	public function testGetLoggedUserAsStaffWithUserSystemDisabled() {
+		// Disable user system
+		$this->setUserSystemEnabled(false);
+
+		// Login as staff
+		$this->login(true);
+
+		// Get logged in user
+		$this->expectExceptionMessage(\ERRORS::INVALID_CREDENTIALS);
+		User::getLoggedUser();
+	}
 }

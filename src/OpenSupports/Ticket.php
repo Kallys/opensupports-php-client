@@ -3,8 +3,11 @@
 namespace OpenSupports;
 
 class Ticket extends \OpenSupports\Lib\Object {
+	private $csrf_token = null;
+
     /**
      * Create a new ticket
+     * Note: If user system is disabled, a "ticket session" will be created.
      *
      * @see \CreateController
      *
@@ -62,7 +65,9 @@ class Ticket extends \OpenSupports\Lib\Object {
 		]);
 
 		// Returns the ticket
-		return new self(\Ticket::getByTicketNumber($response['ticketNumber']));
+		$ticket = new self(\Ticket::getByTicketNumber($response['ticketNumber']));
+		$ticket->csrf_token = $csrf_token;
+		return $ticket;
     }
 
     /**
@@ -73,7 +78,25 @@ class Ticket extends \OpenSupports\Lib\Object {
     public function close() {
     	$controller = new \CloseController;
     	$response = $controller->call([
-    		'ticketNumber' => $this->ticketNumber
+    		'ticketNumber' => $this->ticketNumber,
+    		'csrf_token' => $this->csrf_token
+    	]);
+    	$this->updateData();
+    }
+
+    /**
+     * Add a comment to this ticket
+     *
+     * @see \CommentController
+     *
+     * @param string $content
+     */
+    public function comment(string $content) {
+    	$controller = new \CommentController;
+    	$response = $controller->call([
+    		'ticketNumber' => $this->ticketNumber,
+    		'content' => $content,
+    		'csrf_token' => $this->csrf_token
     	]);
     	$this->updateData();
     }

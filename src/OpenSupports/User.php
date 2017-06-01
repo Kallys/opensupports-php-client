@@ -19,4 +19,18 @@ class User extends \OpenSupports\Lib\Object {
 
 		return new self(\User::getDataStore($userId));
     }
+
+    /**
+     * Return logged in User
+     *
+     * @see \GetUserController
+     *
+     * @return \OpenSupports\User
+     */
+    public static function getLoggedUser() {
+    	$controller = new \GetUserController;
+    	$response = $controller->call();
+
+    	return new self(\User::getUser(\Session::getInstance()->getUserId()));
+    }
 }

@@ -82,4 +82,29 @@ class OpenSupportsTest extends \OpenSupports\Tests\Lib\DbTestCase
 		$this->expectExceptionMessage(\ERRORS::SESSION_EXISTS);
 		$os->login('admin@opensupports.com', 'admin@opensupports.com', true);
 	}
+
+	public function testGetLoggedUser() {
+		// Enable user system
+		$this->setUserSystemEnabled(true);
+		$os = OpenSupports::getInstance();
+
+		// Login as user
+		$this->login();
+
+		// Get logged in user
+		$this->assertEquals('Customer', $os->getLoggedUser()->name);
+
+		// Login as staff
+		$this->login(true);
+
+		// Get logged in user
+		$this->assertEquals('Administrator', $os->getLoggedUser()->name);
+
+		// Log out
+		$this->logout();
+
+		// Try to get not logged in user
+		$this->expectExceptionMessage(\ERRORS::NO_PERMISSION);
+		$os->getLoggedUser();
+	}
 }

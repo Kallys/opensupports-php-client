@@ -53,12 +53,17 @@ Then run:
 `composer require kallys/opensupports-php-client`
 
 ## Supported features
-* /ticket/create Create ticket (except captcha integration)
-* /ticket/get Get ticket
-* /ticket/close Close ticket
-* /user/get-user Get user information
-* /user/login Login
-* /user/logout Log out
+**Note:** Captcha integration is currently not supported.
+
+API Path | API Group | API Name | Integration
+--- | --- | --- | ---
+/ticket/create | Ticket | Create ticket | \OpenSupports\Ticket::create
+/ticket/get | Ticket | Get ticket | \OpenSupports\Ticket::get
+/ticket/comment | Ticket | Comment ticket | \OpenSupports\Ticket->comment
+/ticket/close | Ticket | Close ticket | \OpenSupports\Ticket->close
+/user/get-user | User | Get user information | \OpenSupports\User::get
+/user/login | User | Login | \OpenSupports\OpenSupports::login
+/user/logout | User | Log out | \OpenSupports\OpenSupports::logout
 
 ## Usage
 Example with disabled user system:
@@ -114,8 +119,9 @@ try {
 catch(\Exception $e) {
 	// ticket closing failed
 }
-
 ```
+
+See test files (tests/*) for more examples.
 
 ## Technical details
 This integration uses composer autoloading to bypass some code from official OpenSupports code.

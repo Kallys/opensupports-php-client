@@ -95,4 +95,20 @@ class OpenSupports
 	public static function logout() {
 		(new \LogoutController)->call();
 	}
+
+	/**
+	 * Returns logged in user (User or Staff)
+	 *
+	 * @see \OpenSupports\Staff::getLoggedUser()
+	 * @see \OpenSupports\User::getLoggedUser()
+	 *
+	 * @return \OpenSupports\Staff|\OpenSupports\User
+	 */
+	public static function getLoggedUser() {
+		if(\Session::getInstance()->isStaffLogged()) {
+			return Staff::getLoggedUser();
+		} else {
+			return User::getLoggedUser();
+		}
+	}
 }
